@@ -277,3 +277,93 @@ body {
   flex-wrap: wrap;
   padding-top: 8px;
 }
+
+/* Admin */
+.admin-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 900px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.admin-header {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  padding: 28px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.admin-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.admin-header p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.admin-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.users-table th {
+  text-align: left;
+  padding: 10px 12px;
+  background: var(--bg);
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.users-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.users-table tr:last-child td {
+  border-bottom: none;
+}
+.users-table tr:hover td {
+  background: #f8fafc;
+}
+.empty-row {
+  text-align: center;
+  color: var(--muted);
+  padding: 32px !important;
+}
+
+.loading-row {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.pagination span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}

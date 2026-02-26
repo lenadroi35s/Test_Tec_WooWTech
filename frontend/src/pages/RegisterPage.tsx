@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { AxiosError } from 'axios';
 import { ApiError } from '../types';
@@ -92,6 +92,9 @@ const RegisterPage = () => {
                     </button>
                 </form>
 
+                <p className="auth-link">
+                    ¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
+                </p>
             </div>
         </div>
     );
