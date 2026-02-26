@@ -1,7 +1,7 @@
 ## BACKEND
 
- - Creacion de Usuario admin 
-    # 🔐 Generación del password hasheado
+ # Creacion de Usuario admin 
+    - 🔐 Generación del password hasheado
      El password fue hasheado utilizando **bcryptjs**.
      El hash fue generado ejecutando el siguiente comando desde la raíz del backend:
 
@@ -10,7 +10,7 @@
      ------------------------------------------------------------------------
  
      🖇️ Copiar el hash generado por consola 🖇️ 
-    ## Insertar el usuario admin a la base de datos
+    - Insertar el usuario admin a la base de datos
  
      ⚠️⚠️Tiene que estar primero levantado el contenedor ⚠️⚠️
  
@@ -20,6 +20,7 @@
      -------------------------------------------------------------
      
      - Insertar al usuario
+     ``` sql
      -------------------------------------------------------------
       INSERT INTO users (name, email, password, role)
       VALUES (
@@ -28,10 +29,11 @@
         'HASH_GENERADO_AQUI',
         'admin'
       )
+      ```
       ON CONFLICT (email) DO NOTHING;
      -------------------------------------------------------------
  
-    # Crendeciales de prueba 
+    - Crendeciales de prueba 
  
      Email: admin@test.com
      Password: Admin1234!
