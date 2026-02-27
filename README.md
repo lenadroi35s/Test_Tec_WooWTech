@@ -1,6 +1,29 @@
-## BACKEND
+# WooW Technology — Prueba Técnica
 
-# Creacion de Usuario admin
+API REST de gestión de usuarios con autenticación JWT y frontend en React.
+## Instalación
+
+  ### Clona el repositorio
+
+    git clone 
+    cd woow-tech
+
+ ### Levanta la base de datos
+
+   cd backend
+   docker-compose up -d
+  -------------------------------------------------------------------------
+  Esto levanta PostgreSQL y ejecuta automáticamente `database/schema.sql`,
+  creando la tabla `users` e insertando un usuario admin por defecto.
+  -------------------------------------------------------------------------
+ ### Configura el backend
+ 
+   cp .env.example .env
+   # El .env.example ya tiene los valores correctos para Docker
+   npm install
+   npm run dev
+
+  # Creacion de Usuario admin
 
     - 🔐 Generación del password hasheado
      El password fue hasheado utilizando **bcryptjs**.
@@ -33,8 +56,35 @@
       ON CONFLICT (email) DO NOTHING;
      -------------------------------------------------------------
 
-    - Crendeciales de prueba
+  ###  Configura el frontend
+   cd ../frontend
+   npm install
+   npm start
 
-     Email: admin@test.com
-     Password: Admin1234!
-     Rol: admin
+   ## Credenciales de prueba
+   | Rol   | Email           | Contraseña  |
+   |-------|-----------------|-------------|
+   | Admin | admin@woow.com  | Admin1234!  |
+
+---------------------------------------
+
+
+ ### Autenticación
+ 
+ | Método | Endpoint              | Descripción              | Auth |
+ |--------|-----------------------|--------------------------|------|
+ | POST   | /api/auth/register    | Registrar usuario        | No   |
+ | POST   | /api/auth/login       | Login → devuelve JWT     | No   |
+ 
+ ### Usuarios
+ 
+ | Método | Endpoint       | Descripción                        | Auth  |
+ |--------|----------------|------------------------------------|-------|
+ | GET    | /api/users/me  | Perfil del usuario autenticado     | JWT   |
+ | PUT    | /api/users/me  | Actualizar nombre                  | JWT   |
+ | GET    | /api/users     | Listar usuarios (paginado+búsqueda)| Admin |
+ 
+ ## Tests
+
+ cd backend
+ npm test
