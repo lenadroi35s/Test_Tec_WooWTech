@@ -74,32 +74,32 @@ npm install
 
 ### Configura el frontend
 
-cd ../frontend
-npm install
-npm start
+ cd ../frontend
+ npm install
+ npm start
 
 ## Credenciales de prueba admin
 
-| Rol   | Email          | Contraseña |
-| ----- | -------------- | ---------- |
-| Admin | admin@woow.com | Admin1234! |
+ | Rol   | Email          | Contraseña |
+ | ----- | -------------- | ---------- |
+ | Admin | admin@woow.com | Admin1234! |
 
 ---
 
 ### Autenticación
 
-| Método | Endpoint           | Descripción          | Auth |
-| ------ | ------------------ | -------------------- | ---- |
-| POST   | /api/auth/register | Registrar usuario    | No   |
-| POST   | /api/auth/login    | Login → devuelve JWT | No   |
+ | Método | Endpoint           | Descripción          | Auth |
+ | ------ | ------------------ | -------------------- | ---- |
+ | POST   | /api/auth/register | Registrar usuario    | No   |
+ | POST   | /api/auth/login    | Login → devuelve JWT | No   |
 
 ### Usuarios
 
-| Método | Endpoint      | Descripción                         | Auth  |
-| ------ | ------------- | ----------------------------------- | ----- |
-| GET    | /api/users/me | Perfil del usuario autenticado      | JWT   |
-| PUT    | /api/users/me | Actualizar nombre                   | JWT   |
-| GET    | /api/users    | Listar usuarios (paginado+búsqueda) | Admin |
+ | Método | Endpoint      | Descripción                         | Auth  |
+ | ------ | ------------- | ----------------------------------- | ----- |
+ | GET    | /api/users/me | Perfil del usuario autenticado      | JWT   |
+ | PUT    | /api/users/me | Actualizar nombre                   | JWT   |
+ | GET    | /api/users    | Listar usuarios (paginado+búsqueda) | Admin |
 
 #### Ejemplos
 
@@ -120,6 +120,6 @@ npm start
    "Authorization: Bearer ADMIN_TOKEN"
 
 ## Tests
-cd backend
--
-npm test
+ cd backend
+ -
+ npm test
