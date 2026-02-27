@@ -28,7 +28,8 @@ export class UserController {
     try {
       const page = Number(req.query.page) || 1;
       const limit = Number(req.query.limit) || 20;
-      const result = await userService.getAllUsers(page, limit);
+      const search = String(req.query.search || '');
+      const result = await userService.getAllUsers(page, limit, search);
       res.status(200).json(result);
     } catch (error) {
       next(error);

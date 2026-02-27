@@ -55,7 +55,7 @@ const LoginPage = () => {
                             type="email"
                             value={form.email}
                             onChange={handleChange}
-                            placeholder="tu@email.com"
+                            placeholder="example@email.com"
                             autoComplete="email"
                         />
                     </div>

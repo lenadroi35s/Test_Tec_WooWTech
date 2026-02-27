@@ -25,9 +25,14 @@ app.use(errorHandler);
 
 const start = async (): Promise<void> => {
   await connectDB();
-  app.listen(PORT, () => {
-    console.log(`Servidor en http://localhost:${PORT}`);
-  });
+  try {
+    app.listen(PORT, () => {
+      console.log(`Servidor en http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.log(error)
+  }
+
 };
 
 start();

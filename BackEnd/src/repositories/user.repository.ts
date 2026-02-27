@@ -43,13 +43,26 @@ export class UserRepository {
         return result.rows[0] || null;
     }
 
-    async findAll(limit = 20, offset = 0): Promise<{ users: User[]; total: number }> {
+    async findAll(
+        limit = 20,
+        offset = 0,
+        search = ''
+    ): Promise<{ users: User[]; total: number }> {
+        const searchParam = `%${search}%`;
+
         const [usersResult, countResult] = await Promise.all([
             pool.query<User>(
-                'SELECT * FROM users ORDER BY created_at DESC LIMIT $1 OFFSET $2',
-                [limit, offset]
+                `SELECT * FROM users
+         WHERE name ILIKE $1 OR email ILIKE $2
+         ORDER BY created_at DESC
+         LIMIT $3 OFFSET $4`,
+                [searchParam, searchParam, limit, offset]
             ),
-            pool.query<{ count: string }>('SELECT COUNT(*) as count FROM users'),
+            pool.query<{ count: string }>(
+                `SELECT COUNT(*) as count FROM users
+         WHERE name ILIKE $1 OR email ILIKE $2`,
+                [searchParam, searchParam]
+            ),
         ]);
 
         return {
@@ -57,6 +70,7 @@ export class UserRepository {
             total: parseInt(countResult.rows[0].count, 10),
         };
     }
+
 }
 
 export const userRepository = new UserRepository();

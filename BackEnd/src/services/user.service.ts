@@ -26,10 +26,11 @@ export class UserService {
 
   async getAllUsers(
     page = 1,
-    limit = 20
+    limit = 20,
+    search = ''
   ): Promise<{ users: UserPublic[]; total: number; page: number; totalPages: number }> {
     const offset = (page - 1) * limit;
-    const { users, total } = await userRepository.findAll(limit, offset);
+    const { users, total } = await userRepository.findAll(limit, offset, search);
 
     const usersPublic = users.map(({ password: _, ...u }) => u);
 

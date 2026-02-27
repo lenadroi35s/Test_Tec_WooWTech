@@ -63,7 +63,7 @@ const RegisterPage = () => {
                         <input
                             id="email" name="email" type="email"
                             value={form.email} onChange={handleChange}
-                            placeholder="tu@email.com"
+                            placeholder="example@email.com"
                         />
                     </div>
 

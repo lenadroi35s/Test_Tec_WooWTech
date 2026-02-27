@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userApi } from '../services/api';
 import { User } from '../types';
@@ -12,30 +12,32 @@ const AdminPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [search, setSearch] = useState('');
+    const [searchInput, setSearchInput] = useState('');
+
+    const fetchUsers = useCallback(async () => {
+        setLoading(true);
+        setError('');
+        try {
+            const res = await userApi.getAll(page, 10, search);
+            setUsers(res.users);
+            setTotalPages(res.totalPages);
+            setTotal(res.total);
+        } catch {
+            setError('Error al cargar usuarios');
+        } finally {
+            setLoading(false);
+        }
+    }, [page, search]);
+
+    useEffect(() => { fetchUsers(); }, [fetchUsers]);
 
     useEffect(() => {
-        const fetchUsers = async () => {
-            setLoading(true);
-            try {
-                const res = await userApi.getAll(page, 10);
-                setUsers(res.users);
-                setTotalPages(res.totalPages);
-                setTotal(res.total);
-            } catch {
-                setError('Error al cargar usuarios');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchUsers();
-    }, [page]);
-
-    const filtered = users.filter(
-        (u) =>
-            u.name.toLowerCase().includes(search.toLowerCase()) ||
-            u.email.toLowerCase().includes(search.toLowerCase())
-    );
+        const timer = setTimeout(() => {
+            setSearch(searchInput);
+            setPage(1);
+        }, 400);
+        return () => clearTimeout(timer);
+    }, [searchInput]);
 
     return (
         <div className="page-container">
@@ -44,7 +46,7 @@ const AdminPage = () => {
                 <div className="admin-header">
                     <div>
                         <h1>Panel de Administración</h1>
-                        <p>{total} usuarios registrados</p>
+                        <p>{total} usuarios encontrados</p>
                     </div>
                     <button className="btn btn-secondary" onClick={() => navigate('/profile')}>
                         ← Mi perfil
@@ -56,8 +58,8 @@ const AdminPage = () => {
                         type="text"
                         className="search-input"
                         placeholder="Buscar por nombre o email..."
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
+                        value={searchInput}
+                        onChange={(e) => setSearchInput(e.target.value)}
                     />
 
                     {error && <div className="alert alert-error">{error}</div>}
@@ -77,12 +79,14 @@ const AdminPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {filtered.length === 0 ? (
+                                    {users.length === 0 ? (
                                         <tr>
-                                            <td colSpan={5} className="empty-row">Sin resultados</td>
+                                            <td colSpan={5} className="empty-row">
+                                                {search ? `Sin resultados para "${search}"` : 'No hay usuarios'}
+                                            </td>
                                         </tr>
                                     ) : (
-                                        filtered.map((u) => (
+                                        users.map((u) => (
                                             <tr key={u.id}>
                                                 <td>#{u.id}</td>
                                                 <td>{u.name}</td>

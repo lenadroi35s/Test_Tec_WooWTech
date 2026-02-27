@@ -45,12 +45,12 @@ export const userApi = {
     updateMe: (data: { name: string }) =>
         api.put<{ message: string; user: User }>('/users/me', data).then((res) => res.data),
 
-    getAll: (page = 1, limit = 20) =>
+    getAll: (page = 1, limit = 20, search = '') =>
         api
             .get<{ users: User[]; total: number; page: number; totalPages: number }>(
-                `/users?page=${page}&limit=${limit}`
+                `/users?page=${page}&limit=${limit}&search=${encodeURIComponent(search)}`
             )
-            .then((res) => res.data),
+            .then((r) => r.data),
 };
 
 export default api;
