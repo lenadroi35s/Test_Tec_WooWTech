@@ -13,12 +13,12 @@ API REST de gestión de usuarios con autenticación JWT y frontend en React.
    cd backend
    docker-compose up -d
   -------------------------------------------------------------------------
-  Esto levanta PostgreSQL y ejecuta automáticamente `database/schema.sql`,
-  creando la tabla `users` e insertando un usuario admin por defecto.
+  Esto levanta PostgreSQL y ejecuta automáticamente database/schema.sql,
+  creando la tabla users e insertando un usuario admin por defecto.
   -------------------------------------------------------------------------
  ### Configura el backend
  
-   cp .env.example .env
+   .env.example .env
    # El .env.example ya tiene los valores correctos para Docker
    npm install
    npm run dev
